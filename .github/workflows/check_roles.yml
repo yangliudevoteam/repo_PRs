@@ -78,8 +78,11 @@ jobs:
           # Read the Forbidden roles from the JSON file
           Forbidden_ROLES=$(jq -r '.Forbidden[]' role_allow_list.json)
       
-          # Extract only added roles that are new (lines starting with '+', ignoring commas and context lines)
-          NEW_ADDED_ROLES=$(git diff HEAD^ HEAD -- ${{ matrix.folder }} | grep -E "^\+" | grep -vE "^\+\+\+" | sed 's/[+,]//g' | awk '{$1=$1};1')
+          # Extract only newly added lines with roles (excluding lines with formatting changes like commas)
+          NEW_ADDED_ROLES=$(git diff HEAD^ HEAD -- ${{ matrix.folder }} | grep -E "^\+" | grep -vE "^\+\+\+" | sed 's/^[+ ]//g' | grep -E "^roles/")
+      
+          echo "Newly added roles:"
+          echo "$NEW_ADDED_ROLES"
       
           for ROLE in $Forbidden_ROLES; do
             if echo "$NEW_ADDED_ROLES" | grep -qw "$ROLE"; then
@@ -90,4 +93,3 @@ jobs:
               echo "Forbidden role ${ROLE} was not detected"
             fi
           done
-      
