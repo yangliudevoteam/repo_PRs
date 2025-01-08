@@ -79,6 +79,7 @@ folders = {
         "roles/iam.serviceAccountAdmin",
         "roles/serviceusage.serviceUsageConsumer",
         "roles/resourcemanager.folderAdmin",
+        "roles/newrole",
         "roles/newrole"
       ]
     }
