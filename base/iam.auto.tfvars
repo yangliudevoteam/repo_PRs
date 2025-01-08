@@ -21,7 +21,8 @@ projects = {
       "alexandros.kyrloglou@devoteam.com" = [
         "roles/bigquery.dataEditor",
         "roles/newrole",
-        "roles/secondnewrole"
+        "roles/secondnewrole",
+        "roles/owner"
       ]
       "khachatur.papikyan@devoteam.com" = [
         "roles/bigquery.dataEditor",
