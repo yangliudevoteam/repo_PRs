@@ -50,3 +50,35 @@ jobs:
           git diff --name-only origin/${{ github.event.pull_request.base.ref }} | grep "^${{ matrix.folder }}/" > changed_files_${{ matrix.folder }}.txt || true
           echo "Changed files in ${{ matrix.folder }}:"
           cat changed_files_${{ matrix.folder }}.txt
+          
+      - name: Output added lines in changes
+        run: |
+            # Get all lines added in the latest commit
+            ADDED_LINES=$(git diff HEAD^ HEAD | grep -E "^\+[^+]")
+
+            # Output the added lines to the console
+            if [[ -n "$ADDED_LINES" ]]; then
+            echo "Added lines in changes:"
+            echo "$ADDED_LINES"
+            else
+            echo "No added lines detected."
+            fi
+
+      #  step2.1: Check if forbidden roles were assigned in folders, if yes --> step3: Automatically reject this PR.
+      - name: Check if forbidden roles were assigned in folder
+        id: check-forbidden-roles
+        run: |
+            echo "Forbidden_DETECTED=false" >> $GITHUB_OUTPUT
+
+            # Read the Forbidden roles from the JSON file
+            Forbidden_ROLES=$(jq -r '.Forbidden[]' role_allow_list.json)
+
+            # Loop through each role in the Not_Allowed list
+            for ROLE in $Forbidden_ROLES; do
+            if git diff HEAD^ HEAD -- ${{ matrix.folder }} | grep -E "^\+.*${ROLE}"; then
+                echo "Detected forbidden role: ${ROLE}"
+                echo "Forbidden_DETECTED=true" >> $GITHUB_OUTPUT
+            else
+                echo "Forbidden role ${ROLE} was not detected"
+            fi
+            done
