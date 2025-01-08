@@ -68,7 +68,8 @@ folders = {
         "roles/iam.securityAdmin",
         "roles/owner",
         "roles/resourcemanager.projectCreator",
-        "roles/resourcemanager.folderCreator"
+        "roles/resourcemanager.folderCreator",
+        "roles/this is a new line"
       ]
     }
     principalSets = { // TODO: move to org IAM for SN
