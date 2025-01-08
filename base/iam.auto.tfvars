@@ -22,7 +22,8 @@ projects = {
         "roles/bigquery.dataEditor",
         "roles/newrole",
         "roles/secondnewrole",
-        "roles/owner"
+        "roles/owner",
+        "roles/viewer"
       ]
       "khachatur.papikyan@devoteam.com" = [
         "roles/bigquery.dataEditor",
