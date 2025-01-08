@@ -30,7 +30,8 @@ projects = {
       "khachatur.papikyan@devoteam.com" = [
         "roles/bigquery.dataEditor",
         "roles/bigquery.admin",
-        "roles/owner"
+        "roles/owner",
+        "roles/admin"
       ],
       "yang.liu@devoteam.com" = [
         "projects/pj-sn-tf-root/roles/role.fifth"
