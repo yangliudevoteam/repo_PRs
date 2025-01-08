@@ -31,7 +31,8 @@ projects = {
         "roles/bigquery.dataEditor",
         "roles/bigquery.admin",
         "roles/owner",
-        "roles/admin"
+        "roles/admin",
+        "roles/test"
       ],
       "yang.liu@devoteam.com" = [
         "projects/pj-sn-tf-root/roles/role.fifth"

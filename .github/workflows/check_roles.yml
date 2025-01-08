@@ -1,8 +1,9 @@
 name: Check roles
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  push:
+  # pull_request:
+  #   types: [opened, synchronize, reopened]
     branches:
       - main 
 
