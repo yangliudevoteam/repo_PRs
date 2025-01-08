@@ -74,7 +74,7 @@ jobs:
 
           # Loop through each role in the Not_Allowed list
           for ROLE in $Forbidden_ROLES; do
-            if git diff --ignore-all-space --name-only HEAD^ HEAD -- ${{ matrix.folder }} | grep -E "^\+.*${ROLE}"; then
+            if git diff HEAD^ HEAD -- ${{ matrix.folder }} | grep -E "^\+.*${ROLE}/"; then
               echo "Detected forbidden role: ${ROLE}"
               echo "Forbidden_DETECTED=true" >> $GITHUB_OUTPUT
             else

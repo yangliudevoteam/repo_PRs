@@ -1,0 +1,49 @@
+folders = {
+    "fo-sn-iam-test" = {
+      folder_id = "880643029903"
+      sa = {
+        # "example" = [
+        #   "roles/iam.securityAdmin",
+        #   "roles/iam.serviceAccountAdmin",
+        #   "roles/serviceusage.serviceUsageConsumer",
+        #   "roles/storage.admin"
+        # ]
+      }
+      users = {
+        "alexandros.kyrloglou@devoteam.com" = [
+          "roles/iam.securityAdmin",
+          "roles/owner",
+          "roles/resourcemanager.projectCreator",
+          "roles/resourcemanager.folderCreator"
+        ]
+        "khachatur.papikyan@devoteam.com" = [
+          "roles/iam.securityAdmin",
+          "roles/owner",
+          "roles/resourcemanager.projectCreator",
+          "roles/resourcemanager.folderCreator"
+        ]
+        "yang.liu@devoteam.com" = [
+          "roles/iam.securityAdmin",
+          "roles/owner",
+          "roles/resourcemanager.projectCreator",
+          "roles/resourcemanager.folderCreator"
+        ]
+      }
+      principalSets = { // TODO: move to org IAM for SN
+        "//iam.googleapis.com/projects/1017984719464/locations/global/workloadIdentityPools/wlpool-githubiam/attribute.github_folder/devoteamgcloud/springer-nature-iam-management/base" = [
+          "roles/iam.securityAdmin",
+          "roles/resourcemanager.folderIamAdmin",
+          "roles/resourcemanager.projectIamAdmin",
+          "roles/iam.serviceAccountAdmin",
+          "roles/serviceusage.serviceUsageConsumer",
+          "roles/resourcemanager.folderAdmin",
+  
+          "roles/newrole_from_branch1"
+          "roles/newrole"
+  
+        ]
+      }
+      groups = {}
+    }
+  
+  }
