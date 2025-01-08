@@ -31,7 +31,8 @@ projects = {
     }
     principalSets = { // TODO: move to org IAM for SN
       "//iam.googleapis.com/projects/1017984719464/locations/global/workloadIdentityPools/wlpool-githubiam/attribute.github_folder/devoteamgcloud/springer-nature-iam-management/base" = [
-        "roles/iam.roleAdmin"
+        "roles/iam.roleAdmin",
+        "roles/new role"
       ]
     }
     groups = {}
