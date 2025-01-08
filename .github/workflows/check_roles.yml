@@ -1,0 +1,52 @@
+name: Check roles
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main 
+
+    # Trigger only when files within specific folders change!
+    paths:
+      - 'base/**'
+      - 'sn-infrastructure/**'
+      - 'test-extra-folder/**' 
+      - '.github/workflows/check_roles.yml'
+      # Add more folders as needed
+
+env:
+  orch-project: sn-pj-iam-management
+
+jobs:
+  check-roles:
+    name: Check newly assigned roles in (${{ matrix.folder }})
+    runs-on: ubuntu-latest
+    # Use a matrix strategy to run the job for each changed folder
+  
+    strategy:
+      matrix:
+        folder:
+          - base
+          # - sn-infrastructure
+          # - test-extra-folder 
+          # Add more folders as needed  
+ 
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+
+    steps:
+      # Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Fetch the list of changed files and filter by folder
+      - name: Get Changed Files for ${{ matrix.folder }}
+        id: changed-files
+        run: |
+          echo "Checking changes in folder: ${{ matrix.folder }}"
+          git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1
+          git diff --name-only origin/${{ github.event.pull_request.base.ref }} | grep "^${{ matrix.folder }}/" > changed_files_${{ matrix.folder }}.txt || true
+          echo "Changed files in ${{ matrix.folder }}:"
+          cat changed_files_${{ matrix.folder }}.txt
