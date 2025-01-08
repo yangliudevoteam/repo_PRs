@@ -78,7 +78,8 @@ folders = {
         "roles/resourcemanager.projectIamAdmin",
         "roles/iam.serviceAccountAdmin",
         "roles/serviceusage.serviceUsageConsumer",
-        "roles/resourcemanager.folderAdmin"
+        "roles/resourcemanager.folderAdmin",
+        "roles/newrole"
       ]
     }
     groups = {}
