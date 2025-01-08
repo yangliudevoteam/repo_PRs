@@ -1,0 +1,44 @@
+{
+    "Forbidden": [
+      "roles/owner"
+    ],
+    "Human_approved": [
+      "roles/viewer"
+    ],
+    "Auto_approved": [
+      "roles/aiplatform.user",
+      "roles/appengine.appAdmin",
+      "roles/bigquery.admin",
+      "roles/bigquery.dataEditor",
+      "roles/bigquery.dataViewer",
+      "roles/bigquery.jobUser",
+      "roles/bigquery.user",
+      "roles/cloudfunctions.developer",
+      "roles/cloudkms.cryptoKeyEncrypterDecrypter",
+      "roles/cloudsql.editor",
+      "roles/compute.instanceAdmin.v1",
+      "roles/compute.networkAdmin",
+      "roles/compute.storageAdmin",
+      "roles/container.developer",
+      "roles/datastudio.viewer",
+      "roles/dlp.user",
+      "roles/iam.securityReviewer",
+      "roles/language.user",
+      "roles/logging.logWriter",
+      "roles/logging.viewer",
+      "roles/monitoring.editor",
+      "roles/monitoring.viewer",
+      "roles/pubsub.publisher",
+      "roles/pubsub.subscriber",
+      "roles/run.developer",
+      "roles/spanner.databaseReader",
+      "roles/spanner.databaseWriter",
+      "roles/speech.user",
+      "roles/storage.objectAdmin",
+      "roles/storage.objectCreator",
+      "roles/storage.objectViewer",
+      "roles/storagetransfer.serviceAgent",
+      "roles/translate.user",
+      "roles/vision.user"
+    ]
+}

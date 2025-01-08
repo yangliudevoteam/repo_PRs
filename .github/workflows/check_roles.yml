@@ -67,3 +67,26 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         run: |
             cat detailed_changes.txt
+
+      # Check if forbidden roles were assigned in folders, if yes Automatically reject this PR.
+      - name: Check if forbidden roles were assigned in folder
+        if: steps.changes.outputs.changed == 'true'
+        id: check-forbidden-roles
+        run: |
+          echo "Forbidden_DETECTED=false" >> $GITHUB_OUTPUT
+
+          # Read the Forbidden roles from the JSON file
+          Forbidden_ROLES=$(jq -r '.Forbidden[]' role_allow_list.json)
+
+          # Use git diff to focus only on added lines (starting with '+'), ignoring reformatted lines
+          NEW_ADDED_ROLES=$(git diff HEAD^ HEAD -- ${{ matrix.folder }} | grep -E "^\+" | grep -vE "^\+\+\+")
+
+          for ROLE in $Forbidden_ROLES; do
+            if echo "$NEW_ADDED_ROLES" | grep -q "$ROLE"; then
+              echo "Detected forbidden role: ${ROLE}"
+              echo "Forbidden_DETECTED=true" >> $GITHUB_OUTPUT
+              break
+            else
+              echo "Forbidden role ${ROLE} was not detected"
+            fi
+          done

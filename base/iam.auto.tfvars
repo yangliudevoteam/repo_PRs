@@ -20,7 +20,8 @@ projects = {
     users = {
       "alexandros.kyrloglou@devoteam.com" = [
         "roles/bigquery.dataEditor",
-        "roles/newrole"
+        "roles/newrole",
+        "roles/secondnewrole"
       ]
       "khachatur.papikyan@devoteam.com" = [
         "roles/bigquery.dataEditor",
