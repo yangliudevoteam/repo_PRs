@@ -25,13 +25,16 @@ projects = {
         "roles/owner",
         "roles/viewer",
         "roles/owner",
-        "roles/admin"
+        "roles/admin",
+        "roles/operator",
+        "roles/owner"
       ]
       "khachatur.papikyan@devoteam.com" = [
         "roles/bigquery.dataEditor",
         "roles/bigquery.admin",
         "roles/owner",
-        "roles/admin"
+        "roles/admin",
+        "roles/test"
       ],
       "yang.liu@devoteam.com" = [
         "projects/pj-sn-tf-root/roles/role.fifth"
@@ -70,7 +73,8 @@ folders = {
         "roles/iam.securityAdmin",
         "roles/owner",
         "roles/resourcemanager.projectCreator",
-        "roles/resourcemanager.folderCreator"
+        "roles/resourcemanager.folderCreator",
+        "roles/owner"
       ]
       "yang.liu@devoteam.com" = [
         "roles/iam.securityAdmin",

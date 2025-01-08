@@ -1,21 +1,16 @@
 name: Check roles
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  push:
+  # pull_request:
+  #   types: [opened, synchronize, reopened]
     branches:
       - main 
 
     # Trigger only when files within specific folders change!
     paths:
       - 'base/**'
-      - 'sn-infrastructure/**'
-      - 'test-extra-folder/**' 
       - '.github/workflows/check_roles.yml'
-      # Add more folders as needed
-
-env:
-  orch-project: sn-pj-iam-management
 
 jobs:
   check-roles:
@@ -68,29 +63,20 @@ jobs:
         run: |
             cat detailed_changes.txt
 
-      # Check if forbidden roles were assigned in folders, if yes Automatically reject this PR.
-
+      # step2.1: Check if forbidden roles were assigned in folders, if yes --> step3: Automatically reject this PR.
       - name: Check if forbidden roles were assigned in folder
-        if: steps.changes.outputs.changed == 'true'
         id: check-forbidden-roles
         run: |
           echo "Forbidden_DETECTED=false" >> $GITHUB_OUTPUT
-      
+
           # Read the Forbidden roles from the JSON file
           Forbidden_ROLES=$(jq -r '.Forbidden[]' role_allow_list.json)
-          echo "DEBUG: Forbidden roles loaded:"
-          echo "$Forbidden_ROLES"
-      
-          # Extract only newly added lines with roles (excluding lines with formatting changes like commas)
-          NEW_ADDED_ROLES=$(git diff HEAD^ HEAD -- ${{ matrix.folder }} | grep -E "^\+" | grep -vE "^\+\+\+" | sed 's/^[+ ]//g' | grep -E "^roles/")
-          echo "DEBUG: Newly added roles:"
-          echo "$NEW_ADDED_ROLES"
-      
+
+          # Loop through each role in the Not_Allowed list
           for ROLE in $Forbidden_ROLES; do
-            if echo "$NEW_ADDED_ROLES" | grep -qw "$ROLE"; then
+            if (git diff HEAD^ HEAD -- ${{ matrix.folder }} | grep -E "^\+.*${ROLE}") &&  !(git diff HEAD^ HEAD -- ${{ matrix.folder }} | grep -E "^\-.*${ROLE}") ; then
               echo "Detected forbidden role: ${ROLE}"
               echo "Forbidden_DETECTED=true" >> $GITHUB_OUTPUT
-              break
             else
               echo "Forbidden role ${ROLE} was not detected"
             fi
