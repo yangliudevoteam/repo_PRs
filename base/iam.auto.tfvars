@@ -80,7 +80,8 @@ folders = {
         "roles/serviceusage.serviceUsageConsumer",
         "roles/resourcemanager.folderAdmin",
         "roles/newrole",
-        "roles/newrole"
+        "roles/newrole",
+        "roles/yang"
       ]
     }
     groups = {}
